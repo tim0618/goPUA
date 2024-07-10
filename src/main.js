@@ -1,5 +1,5 @@
 import { createApp } from "vue";
-import { Quasar } from "quasar";
+import { Quasar, Dialog } from "quasar";
 import quasarLang from "quasar/lang/zh-TW";
 // import './style.css'
 import App from "./App.vue";
@@ -11,8 +11,9 @@ import "quasar/src/css/index.sass";
 
 import { createRouter, createWebHistory } from "vue-router";
 import Layout from "./Layout/Layout.vue";
-import Home from "./page/Home.vue";
-import test from "./page/test.vue";
+import GoPUA from "./page/Home.vue";
+import Hot from "./page/Hot.vue";
+import New from "./page/New.vue";
 
 const routes = [
   {
@@ -21,13 +22,18 @@ const routes = [
     children: [
       {
         path: "/",
-        name: "Home",
-        component: Home,
+        name: "GoPUA",
+        component: GoPUA,
       },
       {
-        path: "/test",
-        name: "test",
-        component: test,
+        path: "/Hot",
+        name: "Hot",
+        component: Hot,
+      },
+      {
+        path: "/New",
+        name: "New",
+        component: New,
       },
     ],
   },
@@ -41,7 +47,7 @@ const router = createRouter({
 const myApp = createApp(App)
   .use(router)
   .use(Quasar, {
-    plugins: {},
+    plugins: { Dialog },
     lang: quasarLang,
   })
   .mount("#app");
