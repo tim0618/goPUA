@@ -16,8 +16,9 @@
             <a href="/">GoPUA</a>
           </q-toolbar-title>
         </q-toolbar>
-        <p>{{ userInput }}</p>
-        <q-btn label="Login" color="primary" @click="confirm" />
+        <p>{{ userRegister }}</p>
+        <p>{{ userLogin }}</p>
+        <q-btn label="登入" color="primary" @click="choiceLogin" />
       </q-header>
 
       <q-drawer
@@ -90,8 +91,9 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, h } from "vue";
 import { useQuasar } from "quasar";
+import LoginPage from "../page/Login.vue";
 
 const miniState = ref(false);
 const drawer = ref(false);
@@ -105,27 +107,37 @@ const drawerClick = (e) => {
 };
 
 const $q = useQuasar();
-const userInput = ref("");
+const userRegister = ref({
+  account: "",
+  email: "",
+  password: "",
+  passwordcheck: "",
+});
+const userLogin = ref({
+  account: "",
+  password: "",
+});
 
-const confirm = () => {
-  $q.dialog({
-    title: "Prompt",
-    message: "What is your name?",
-    prompt: {
-      model: "",
-      type: "text", // optional
+const choiceLogin = () => {
+  const contentRef = ref(null);
+
+  const content = h(LoginPage, {
+    onRegister: (data) => {
+      userRegister.value = data;
+      contentRef.value.hide();
     },
-    cancel: true,
-    persistent: true,
-  })
-    .onOk((data) => {
-      userInput.value = data;
-    })
-    .onCancel(() => {
-      console.log(">>>> Cancel");
-    })
-    .onDismiss(() => {
-      console.log("I am triggered on both OK and Cancel");
-    });
+    onLogin: (data) => {
+      userLogin.value = data;
+      contentRef.value.hide();
+    },
+    onCancel: () => {
+      console.log("dialog canceled");
+      contentRef.value.hide();
+    },
+  });
+
+  contentRef.value = $q.dialog({
+    component: content,
+  });
 };
 </script>
