@@ -1,12 +1,13 @@
 <template>
-  <div class="q-pa-md row items-start q-gutter-md hotactivity">
+  <div class="q-pa-md row items-start q-gutter-md">
     <q-card class="my-card" v-if="activityitem">
       <q-card-section class="acivity">
-        <div class="text-h6">{{ activityitem.name }}</div>
-        <div class="text-subtitle2">{{ activityitem.type }}</div>
-        <div class="text-subtitle2">{{ activityitem.address }}</div>
-        <div class="text-subtitle2">{{ activityitem.day }}</div>
-        <div class="text-subtitle2">{{ activityitem.time }}</div>
+        <div class="text-h6 content">{{ activityitem.name }}</div>
+        <div class="text-subtitle2 content">{{ activityitem.type }}</div>
+        <div class="text-subtitle2 content">{{ activityitem.address }}</div>
+        <div class="text-subtitle2 content">{{ activityitem.day }}</div>
+        <div class="text-subtitle2 content">{{ activityitem.time }}</div>
+        <q-btn>查看更多詳細資訊</q-btn>
       </q-card-section>
     </q-card>
   </div>
@@ -18,10 +19,12 @@ import { defineProps } from "vue";
 const prop = defineProps(["activityitem"]);
 </script>
 
-<style  scoped>
-.my-card{
-  width: 100%;
-  max-width: 250px;
+<style scoped>
+.my-card {
+  width: 250px;
+  padding: 10px;
 }
-
+.content {
+  margin: 5px;
+}
 </style>

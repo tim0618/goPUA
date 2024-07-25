@@ -50,9 +50,7 @@ const model = ref({
 });
 
 const Register = () => {
-  console.log("AAA");
   emit("register", model.value);
-  console.log("BBB");
   setType("login");
 };
 

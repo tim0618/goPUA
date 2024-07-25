@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="head">
     <q-layout
       view="hHh Lpr lff"
       container
@@ -8,17 +8,17 @@
     >
       <q-header
         elevated
-        :class="$q.dark.isActive ? 'bg-secondary' : 'bg-black'"
-        style="display: flex"
+        :class="$q.dark.isActive"
+        style="display: flex; background-color: rgb(203, 225, 243)"
       >
         <q-toolbar>
           <q-toolbar-title>
-            <a href="/">GoPUA</a>
+            <a href="/" class="title">GoPUA</a>
           </q-toolbar-title>
         </q-toolbar>
-        <p>{{ userRegister }}</p>
-        <p>{{ userLogin }}</p>
-        <q-btn label="登入" color="primary" @click="choiceLogin" />
+        <!-- <p>{{ userRegister }}</p>
+        <p>{{ userLogin }}</p> -->
+        <q-btn label="登入" @click="choiceLogin" class="loginbtn" />
       </q-header>
 
       <q-drawer
@@ -26,44 +26,127 @@
         show-if-above
         :mini="!drawer || miniState"
         @click.capture="drawerClick"
-        :width="200"
+        :width="240"
         :breakpoint="500"
         bordered
-        :class="$q.dark.isActive ? 'bg-grey-9' : 'bg-grey-3'"
+        :class="$q.dark.isActive"
+        style="background-color: lightsteelblue"
       >
         <q-scroll-area class="fit" :horizontal-thumb-style="{ opacity: 0 }">
-          <q-list padding>
-            <q-item clickable v-ripple href="/Hot">
-              <q-item-section avatar>
-                <q-icon name="inbox" />
-              </q-item-section>
+          <q-list padding class="list">
+            <q-expansion-item
+              clickable
+              v-ripple
+              href="/HotAct"
+              :content-inset-level="0.5"
+              expand-separator
+              icon="mail"
+              label="熱門活動"
+              expand-icon="null"
+            >
+            </q-expansion-item>
 
-              <q-item-section> Hot </q-item-section>
-            </q-item>
+            <q-expansion-item
+              clickable
+              v-ripple
+              href="/NewAct"
+              :content-inset-level="0.5"
+              expand-separator
+              icon="mail"
+              label="最新活動"
+              expand-icon="null"
+            >
+            </q-expansion-item>
 
-            <q-item active clickable v-ripple href="/New">
-              <q-item-section avatar>
-                <q-icon name="star" />
-              </q-item-section>
+            <q-expansion-item
+              :content-inset-level="0.5"
+              expand-separator
+              icon="mail"
+              label="活動分類"
+              expand-icon="null"
+            >
+              <q-expansion-item
+                :content-inset-level="0.5"
+                href="/Article"
+                icon="receipt"
+                label="藝文表演"
+                expand-icon="null"
+              >
+              </q-expansion-item>
+              <q-expansion-item
+                :content-inset-level="0.5"
+                href="/Show"
+                icon="receipt"
+                label="活動展覽"
+                expand-icon="null"
+              >
+              </q-expansion-item>
+              <q-expansion-item
+                :content-inset-level="0.5"
+                href="/Concert"
+                icon="receipt"
+                label="演唱會"
+                expand-icon="null"
+              >
+              </q-expansion-item>
+              <q-expansion-item
+                :content-inset-level="0.5"
+                href="/Event"
+                icon="receipt"
+                label="體育賽事"
+                expand-icon="null"
+              >
+              </q-expansion-item>
+            </q-expansion-item>
 
-              <q-item-section> New </q-item-section>
-            </q-item>
-
-            <!-- <q-item clickable v-ripple>
-              <q-item-section avatar>
-                <q-icon name="send" />
-              </q-item-section>
-
-              <q-item-section> Send </q-item-section>
-            </q-item>
-
-            <q-item clickable v-ripple>
-              <q-item-section avatar>
-                <q-icon name="drafts" />
-              </q-item-section>
-
-              <q-item-section> Drafts </q-item-section>
-            </q-item> -->
+            <q-expansion-item
+              :content-inset-level="0.5"
+              expand-separator
+              icon="mail"
+              label="周邊商品"
+              expand-icon="null"
+            >
+              <q-expansion-item
+                :content-inset-level="0.5"
+                href="/HotItem"
+                icon="receipt"
+                label="熱門周邊"
+                expand-icon="null"
+              >
+              </q-expansion-item>
+              <q-expansion-item
+                :content-inset-level="0.5"
+                href="/ArticleItem"
+                icon="receipt"
+                label="藝文周邊"
+                expand-icon="null"
+              >
+              </q-expansion-item>
+              <q-expansion-item
+                :content-inset-level="0.5"
+                href="/ShowItem"
+                icon="receipt"
+                label="展覽周邊"
+                expand-icon="null"
+              >
+              </q-expansion-item>
+              <q-expansion-item
+                :content-inset-level="0.5"
+                href="/ConcertItem"
+                icon="receipt"
+                label="演唱會周邊"
+                expand-icon="null"
+              >
+              </q-expansion-item>
+              <q-expansion-item
+                :content-inset-level="0.5"
+                href="/EventItem"
+                icon="receipt"
+                label="體育周邊"
+                expand-icon="null"
+              >
+              </q-expansion-item>
+            </q-expansion-item>
           </q-list>
         </q-scroll-area>
 
@@ -75,7 +158,7 @@
             denses
             round
             unelevated
-            color="accent"
+            style="background-color: rgb(144, 137, 183)"
             icon="chevron_left"
             @click="miniState = true"
           />
@@ -83,9 +166,7 @@
       </q-drawer>
 
       <!-- 全部內容 -->
-      <q-page-container>
-        <router-view />
-      </q-page-container>
+      <q-page-container> <router-view /> </q-page-container>
     </q-layout>
   </div>
 </template>
@@ -124,10 +205,11 @@ const choiceLogin = () => {
   const content = h(LoginPage, {
     onRegister: (data) => {
       userRegister.value = data;
-      contentRef.value.hide();
     },
     onLogin: (data) => {
       userLogin.value = data;
+      if (userLogin.account == admin && userLogin.password == admin) {
+      }
       contentRef.value.hide();
     },
     onCancel: () => {
@@ -141,3 +223,22 @@ const choiceLogin = () => {
   });
 };
 </script>
+<style scoped>
+.head {
+  font-weight: bold;
+  font-size: 16px;
+}
+.title {
+  font-size: 32px;
+  font-weight: bold;
+  text-decoration: none;
+  color: rgb(22, 13, 81);
+}
+.loginbtn {
+  width: 70px;
+  margin: 10px;
+  background-color: white;
+  color: black;
+  font-weight: bold;
+}
+</style>
