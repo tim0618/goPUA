@@ -2,11 +2,6 @@
   <div>
     <div class="top">
       <div class="title">熱門周邊</div>
-      <q-input class="search" v-model="text" input-class="text-left">
-        <template v-slot:append>
-          <q-btn><q-icon name="search" /></q-btn>
-        </template>
-      </q-input>
     </div>
 
     <div class="HotItem">
@@ -20,8 +15,6 @@
 <script setup>
 import { reactive, ref } from "vue";
 import Merchandise from "../component/merchandise.vue";
-
-const text = ref("");
 
 const hotitems = reactive([
   {
@@ -76,7 +69,7 @@ const hotitems = reactive([
 ]);
 </script>
 
-<style>
+<style scoped>
 .HotItem {
   display: flex;
   flex-wrap: wrap;
@@ -98,5 +91,6 @@ const hotitems = reactive([
 }
 .title {
   font-size: 36px;
+  margin-top: 10px;
 }
 </style>

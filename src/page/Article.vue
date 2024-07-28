@@ -2,15 +2,15 @@
   <div>
     <div class="top">
       <div class="title">藝文表演</div>
-      <q-input class="search" v-model="text" input-class="text-left">
+      <q-input class="search" v-model="searchtext" input-class="text-left">
         <template v-slot:append>
-          <q-btn><q-icon name="search" /></q-btn>
+          <q-icon name="search" />
         </template>
       </q-input>
     </div>
 
     <div class="Article">
-      <div v-for="article in articles">
+      <div v-for="article in filterAndsorter">
         <Activity :activityitem="article" />
       </div>
     </div>
@@ -18,10 +18,8 @@
 </template>
 
 <script setup>
-import { reactive, ref } from "vue";
+import { reactive, ref, computed } from "vue";
 import Activity from "../component/activity.vue";
-
-const text = ref("");
 
 const articles = reactive([
   {
@@ -35,7 +33,7 @@ const articles = reactive([
     name: "趣動漫",
     type: "展覽",
     address: "華山文化園區",
-    day: "2024/8/5~9/30",
+    day: "2024/8/5",
     time: "9:00-17:00",
   },
   {
@@ -46,21 +44,21 @@ const articles = reactive([
     time: "9:00~12:00",
   },
   {
-    name: "aespa全球巡演",
+    name: "asdfg全球巡演",
     type: "演唱會",
     address: "高雄巨蛋",
     day: "2024/10/3",
     time: "18:00~21:00",
   },
   {
-    name: "趣動漫",
+    name: "有趣動漫",
     type: "展覽",
     address: "華山文化園區",
-    day: "2024/8/5~9/30",
+    day: "2024/8/5",
     time: "9:00-17:00",
   },
   {
-    name: "大聯盟",
+    name: "小聯盟",
     type: "體育賽事",
     address: "台中洲際棒球場",
     day: "2024/9/7",
@@ -70,13 +68,22 @@ const articles = reactive([
     name: "aespa全球巡演",
     type: "演唱會",
     address: "高雄巨蛋",
-    day: "2024/10/3",
+    day: "2024/10/6",
     time: "18:00~21:00",
   },
 ]);
+
+const searchtext = ref("");
+
+const filterAndsorter = computed(() => {
+  const filtered = articles.filter((art) =>
+    art.name.includes(searchtext.value)
+  );
+  return filtered.sort((a, b) => new Date(a.day) - new Date(b.day));
+});
 </script>
 
-<style>
+<style scoped>
 .Article {
   display: flex;
   flex-wrap: wrap;

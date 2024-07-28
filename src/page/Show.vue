@@ -2,15 +2,15 @@
   <div>
     <div class="top">
       <div class="title">活動展覽</div>
-      <q-input class="search" v-model="text" input-class="text-left">
+      <q-input class="search" v-model="searchtext" input-class="text-left">
         <template v-slot:append>
-          <q-btn><q-icon name="search" /></q-btn>
+          <q-icon name="search" />
         </template>
       </q-input>
     </div>
 
     <div class="Show">
-      <div v-for="show in shows">
+      <div v-for="show in filterAndsorter">
         <Activity :activityitem="show" />
       </div>
     </div>
@@ -18,10 +18,8 @@
 </template>
 
 <script setup>
-import { reactive, ref } from "vue";
+import { reactive, ref, computed } from "vue";
 import Activity from "../component/activity.vue";
-
-const text = ref("");
 
 const shows = reactive([
   {
@@ -74,9 +72,16 @@ const shows = reactive([
     time: "18:00~21:00",
   },
 ]);
+
+const searchtext = ref("");
+
+const filterAndsorter = computed(() => {
+  const filtered = shows.filter((sho) => sho.name.includes(searchtext.value));
+  return filtered.sort((a, b) => new Date(a.day) - new Date(b.day));
+});
 </script>
 
-<style>
+<style scoped>
 .Show {
   display: flex;
   flex-wrap: wrap;

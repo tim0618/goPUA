@@ -2,15 +2,15 @@
   <div>
     <div class="top">
       <div class="title">體育賽事</div>
-      <q-input class="search" v-model="text" input-class="text-left">
+      <q-input class="search" v-model="searchtext" input-class="text-left">
         <template v-slot:append>
-          <q-btn><q-icon name="search" /></q-btn>
+          <q-icon name="search" />
         </template>
       </q-input>
     </div>
 
     <div class="Event">
-      <div v-for="event in events">
+      <div v-for="event in filterAndsorter">
         <Activity :activityitem="event" />
       </div>
     </div>
@@ -18,10 +18,8 @@
 </template>
 
 <script setup>
-import { reactive, ref } from "vue";
+import { reactive, ref, computed } from "vue";
 import Activity from "../component/activity.vue";
-
-const text = ref("");
 
 const events = reactive([
   {
@@ -74,9 +72,16 @@ const events = reactive([
     time: "18:00~21:00",
   },
 ]);
+
+const searchtext = ref("");
+
+const filterAndsorter = computed(() => {
+  const filtered = events.filter((eve) => eve.name.includes(searchtext.value));
+  return filtered.sort((a, b) => new Date(a.day) - new Date(b.day));
+});
 </script>
 
-<style>
+<style scoped>
 .Event {
   display: flex;
   flex-wrap: wrap;

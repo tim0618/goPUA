@@ -2,15 +2,10 @@
   <div>
     <div class="top">
       <div class="title">熱門活動</div>
-      <q-input class="search" v-model="text" input-class="text-left">
-        <template v-slot:append>
-          <q-btn><q-icon name="search" /></q-btn>
-        </template>
-      </q-input>
     </div>
 
     <div class="HotAct">
-      <div v-for="hotAct in hotActs">
+      <div v-for="hotAct in sorteredActivity" :key="hotAct.day">
         <Activity :activityitem="hotAct" />
       </div>
     </div>
@@ -18,10 +13,8 @@
 </template>
 
 <script setup>
-import { reactive, ref } from "vue";
+import { reactive, ref, computed } from "vue";
 import Activity from "../component/activity.vue";
-
-const text = ref("");
 
 const hotActs = reactive([
   {
@@ -35,7 +28,7 @@ const hotActs = reactive([
     name: "趣動漫",
     type: "展覽",
     address: "華山文化園區",
-    day: "2024/8/5~9/30",
+    day: "2024/8/5",
     time: "9:00-17:00",
   },
   {
@@ -56,7 +49,7 @@ const hotActs = reactive([
     name: "趣動漫",
     type: "展覽",
     address: "華山文化園區",
-    day: "2024/8/5~9/30",
+    day: "2024/8/5",
     time: "9:00-17:00",
   },
   {
@@ -74,9 +67,13 @@ const hotActs = reactive([
     time: "18:00~21:00",
   },
 ]);
+
+const sorteredActivity = computed(() => {
+  return hotActs.sort((a, b) => new Date(a.day) - new Date(b.day));
+});
 </script>
 
-<style>
+<style scoped>
 .HotAct {
   display: flex;
   flex-wrap: wrap;
@@ -98,5 +95,6 @@ const hotActs = reactive([
 }
 .title {
   font-size: 36px;
+  margin-top: 10px;
 }
 </style>

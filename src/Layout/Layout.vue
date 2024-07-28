@@ -16,8 +16,6 @@
             <a href="/" class="title">GoPUA</a>
           </q-toolbar-title>
         </q-toolbar>
-        <!-- <p>{{ userRegister }}</p>
-        <p>{{ userLogin }}</p> -->
         <q-btn label="登入" @click="choiceLogin" class="loginbtn" />
       </q-header>
 

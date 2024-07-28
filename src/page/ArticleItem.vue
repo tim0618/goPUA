@@ -2,15 +2,15 @@
   <div>
     <div class="top">
       <div class="title">藝文周邊</div>
-      <q-input class="search" v-model="text" input-class="text-left">
+      <q-input class="search" v-model="searchtext" input-class="text-left">
         <template v-slot:append>
-          <q-btn><q-icon name="search" /></q-btn>
+          <q-icon name="search" />
         </template>
       </q-input>
     </div>
 
     <div class="ArticleItem">
-      <div v-for="articleitem in articleitems">
+      <div v-for="articleitem in filterAndsorter">
         <Merchandise :merchandiseitem="articleitem" />
       </div>
     </div>
@@ -18,10 +18,8 @@
 </template>
 
 <script setup>
-import { reactive, ref } from "vue";
+import { reactive, ref, computed } from "vue";
 import Merchandise from "../component/merchandise.vue";
-
-const text = ref("");
 
 const articleitems = reactive([
   {
@@ -74,9 +72,18 @@ const articleitems = reactive([
     img: "https://a.rimg.com.tw/c1/166/76a/matildawallace32/5/86/22426856414598_708.jpg",
   },
 ]);
+
+const searchtext = ref("");
+
+const filterAndsorter = computed(() => {
+  const filtered = articleitems.filter((art) =>
+    art.name.includes(searchtext.value)
+  );
+  return filtered.sort((a, b) => new Date(a.day) - new Date(b.day));
+});
 </script>
 
-<style>
+<style scoped>
 .ArticleItem {
   display: flex;
   flex-wrap: wrap;
