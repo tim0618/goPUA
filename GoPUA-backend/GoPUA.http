@@ -1,0 +1,6 @@
+@GoPUA_HostAddress = http://localhost:5218
+
+GET {{GoPUA_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

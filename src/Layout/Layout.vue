@@ -10,13 +10,22 @@
         elevated
         :class="$q.dark.isActive"
         style="display: flex; background-color: rgb(203, 225, 243)"
+        class="header"
       >
         <q-toolbar>
           <q-toolbar-title>
             <a href="/" class="title">GoPUA</a>
           </q-toolbar-title>
+          <div>
+            {{ userLogin }}
+            <a href="/Cart"> <font-awesome-icon :icon="['fas', 'user']" /> </a>
+            <a href="/User"> <font-awesome-icon :icon="['fas', 'user']" /> </a>
+            <q-btn label="登出" @click="" class="loginbtn" />
+          </div>
+          <div>
+            <q-btn label="登入" @click="choiceLogin" class="loginbtn" />
+          </div>
         </q-toolbar>
-        <q-btn label="登入" @click="choiceLogin" class="loginbtn" />
       </q-header>
 
       <q-drawer
@@ -206,8 +215,6 @@ const choiceLogin = () => {
     },
     onLogin: (data) => {
       userLogin.value = data;
-      if (userLogin.account == admin && userLogin.password == admin) {
-      }
       contentRef.value.hide();
     },
     onCancel: () => {
@@ -226,6 +233,10 @@ const choiceLogin = () => {
   font-weight: bold;
   font-size: 16px;
 }
+.header {
+  display: flex;
+  flex-direction: row;
+}
 .title {
   font-size: 32px;
   font-weight: bold;
@@ -233,8 +244,8 @@ const choiceLogin = () => {
   color: rgb(22, 13, 81);
 }
 .loginbtn {
-  width: 70px;
-  margin: 10px;
+  width: 75px;
+  margin: 15px;
   background-color: white;
   color: black;
   font-weight: bold;

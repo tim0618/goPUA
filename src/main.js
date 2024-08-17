@@ -1,17 +1,23 @@
 import { createApp } from "vue";
 import { Quasar, Dialog } from "quasar";
 import quasarLang from "quasar/lang/zh-TW";
-// import './style.css'
 import App from "./App.vue";
+import { createRouter, createWebHistory } from "vue-router";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import { fas } from "@fortawesome/free-solid-svg-icons";
 
-// Import icon libraries
+// Import Quasar CSS
 import "@quasar/extras/material-icons/material-icons.css";
-// Import Quasar css
 import "quasar/src/css/index.sass";
 
-import { createRouter, createWebHistory } from "vue-router";
+// Import icon libraries
+library.add(fas);
+
 import Layout from "./Layout/Layout.vue";
 import GoPUA from "./page/Home.vue";
+import Cart from "./page/Cart.vue";
+import User from "./page/User.vue";
 import HotAct from "./page/HotAct.vue";
 import NewAct from "./page/NewAct.vue";
 import Article from "./page/Article.vue";
@@ -33,6 +39,16 @@ const routes = [
         path: "/",
         name: "GoPUA",
         component: GoPUA,
+      },
+      {
+        path: "/Cart",
+        name: "Cart",
+        component: Cart,
+      },
+      {
+        path: "/User",
+        name: "User",
+        component: User,
       },
       {
         path: "/HotAct",
@@ -104,4 +120,5 @@ const myApp = createApp(App)
     plugins: { Dialog },
     lang: quasarLang,
   })
+  .component("font-awesome-icon", FontAwesomeIcon)
   .mount("#app");

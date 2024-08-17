@@ -1,0 +1,19 @@
+{
+  "Version": 1,
+  "Hash": "7QzlvwAbo4k3nEm6gI7tX2dgmwVECBXu0ATSGN/oaow=",
+  "Source": "GoPUA",
+  "BasePath": "_content/GoPUA",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "GoPUA\\wwwroot",
+      "Source": "GoPUA",
+      "ContentRoot": "c:\\Users\\user\\Desktop\\GoPUA-backend\\wwwroot\\",
+      "BasePath": "_content/GoPUA",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": []
+}
