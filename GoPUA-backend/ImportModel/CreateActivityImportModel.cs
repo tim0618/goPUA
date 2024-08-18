@@ -14,5 +14,4 @@ public class CreateActivityImportModel
     public string content { get; set; }
     public string hoster { get; set; }
     public IFormFile? areaImg { get; set; }
-    public int ticket_Id { get; set; }
 }

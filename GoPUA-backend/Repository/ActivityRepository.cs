@@ -18,9 +18,9 @@ public class ActivityRepository : IActivityRepository
         _context.Activity.Add(activity);
         _context.SaveChanges();
     }
-    public void EditActivity(ActivityModel Activity)
+    public void EditActivity(ActivityModel activity)
     {
-        _context.Activity.Update(Activity);
+        _context.Activity.Update(activity);
         _context.SaveChanges();
     }
     public ActivityModel GetActivity(int Id)

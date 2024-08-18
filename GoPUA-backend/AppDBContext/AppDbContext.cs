@@ -10,5 +10,6 @@ public class AppDbContext : DbContext
 
     public DbSet<UserModel> User { get; set; }
     public DbSet<ActivityModel> Activity { get; set; }
+    public DbSet<TicketModel> Ticket { get; set; }
 
 }

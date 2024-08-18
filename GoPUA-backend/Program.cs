@@ -19,13 +19,16 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("SqlServerDB"))); // 使用 SQL Server 來配置資料庫連線字串
 
 // Service
-builder.Services.AddScoped<IActivityService, ActivityService>();
-builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<Token>();
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IActivityService, ActivityService>();
+builder.Services.AddScoped<ITicketService, TicketService>();
+
 
 // Repository
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IActivityRepository, ActivityRepository>();
+builder.Services.AddScoped<ITicketRepository, TicketRepository>();
 
 // 配置 JWT 驗證
 builder.Services

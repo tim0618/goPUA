@@ -9,7 +9,7 @@ public class ActivityService : IActivityService
 {
     private readonly IActivityRepository _repository;
 
-    public ActivityService(IActivityRepository repository, Token token)
+    public ActivityService(IActivityRepository repository)
     {
         _repository = repository;
     }
@@ -42,7 +42,7 @@ public class ActivityService : IActivityService
                 hoster = createActivity.hoster,
                 content = createActivity.content,
                 areaImg = FileName,
-                ticket_Id = createActivity.ticket_Id
+                ticket_Id = null
             };
             _repository.CreateActivity(createActModel);
 
