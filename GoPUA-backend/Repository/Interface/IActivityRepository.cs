@@ -8,4 +8,5 @@ public interface IActivityRepository
     void CreateActivity(ActivityModel activity);
     ActivityModel GetActivity(int Id);
     void EditActivity(ActivityModel activity);
+    void DeleteActivity(int Id);
 }

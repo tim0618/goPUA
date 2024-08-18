@@ -36,5 +36,16 @@ public class ActivityController : ControllerBase
         }
         return BadRequest();
     }
+    [HttpPut("DeleteActivity")]
+    [Authorize]
+    public IActionResult DeleteActivity(DeleteActivityImportModel deleteActivity)
+    {
+        if (deleteActivity != null)
+        {
+            _service.DeleteActivity(deleteActivity);
+            return Ok();
+        }
+        return BadRequest();
+    }
 
 }

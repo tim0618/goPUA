@@ -27,5 +27,14 @@ public class ActivityRepository : IActivityRepository
     {
         return _context.Activity.AsNoTracking().FirstOrDefault(a => a.Id == Id);
     }
+    public void DeleteActivity(int Id)
+    {
+        var activity = _context.Activity.Where(activity => activity.Id == Id).FirstOrDefault();
 
+        if (activity != null)
+        {
+            _context.Activity.Remove(activity);
+            _context.SaveChanges();
+        }
+    }
 }

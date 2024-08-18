@@ -78,7 +78,6 @@ public class ActivityService : IActivityService
             }
 
             var edit = _repository.GetActivity(editActivity.Id);
-
             var editActModel = new ActivityModel
             {
                 Id = editActivity.Id,
@@ -98,7 +97,6 @@ public class ActivityService : IActivityService
             };
             _repository.EditActivity(editActModel);
 
-
             if (FileName != null)
             {
                 var path = Path.Combine(folderPath, FileName);
@@ -115,4 +113,18 @@ public class ActivityService : IActivityService
         }
     }
     #endregion
+    #region 刪除活動
+    public void DeleteActivity(DeleteActivityImportModel deleteActivity)
+    {
+        try
+        {
+            _repository.DeleteActivity(deleteActivity.Id);
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message.ToString());
+        }
+    }
+    #endregion
 }
+

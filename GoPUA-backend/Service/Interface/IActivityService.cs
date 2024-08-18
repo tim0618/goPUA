@@ -7,4 +7,5 @@ public interface IActivityService
 {
     void CreateActivity(CreateActivityImportModel createActivity);
     void EditActivity(EditActivityImportModel editActivity);
+    void DeleteActivity(DeleteActivityImportModel deleteActivity);
 }
