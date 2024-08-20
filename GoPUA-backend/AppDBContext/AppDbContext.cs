@@ -11,5 +11,6 @@ public class AppDbContext : DbContext
     public DbSet<UserModel> User { get; set; }
     public DbSet<ActivityModel> Activity { get; set; }
     public DbSet<TicketModel> Ticket { get; set; }
-
+    public DbSet<CartModel> Cart { get; set; }
+    public DbSet<OrderModel> Order { get; set; }
 }

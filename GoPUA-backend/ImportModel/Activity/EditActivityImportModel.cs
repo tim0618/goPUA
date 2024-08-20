@@ -16,4 +16,6 @@ public class EditActivityImportModel
     public string hoster { get; set; }
     public IFormFile? areaImg { get; set; }
     public List<int>? ticket_Id { get; set; }
+    public List<int>? ticketList { get; set; }
+
 }

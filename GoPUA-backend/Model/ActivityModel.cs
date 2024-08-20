@@ -15,5 +15,6 @@ public class ActivityModel
     public string content { get; set; }
     public string hoster { get; set; }
     public string? areaImg { get; set; }
-    public List<int>? ticket_Id { get; set; }
+    public List<int>? ticketList { get; set; }
+
 }

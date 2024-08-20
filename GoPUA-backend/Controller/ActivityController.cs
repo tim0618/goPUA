@@ -36,13 +36,46 @@ public class ActivityController : ControllerBase
         }
         return BadRequest();
     }
-    [HttpPut("DeleteActivity")]
+    [HttpDelete("DeleteActivity")]
     [Authorize]
     public IActionResult DeleteActivity(DeleteActivityImportModel deleteActivity)
     {
         if (deleteActivity != null)
         {
             _service.DeleteActivity(deleteActivity);
+            return Ok();
+        }
+        return BadRequest();
+    }
+    [HttpPost("CreateTicket")]
+    [Authorize]
+    public IActionResult CreateTicket(CreateTicketImportModel createTicket)
+    {
+        if (createTicket != null)
+        {
+            _service.CreateTicket(createTicket);
+            return Ok();
+        }
+        return BadRequest();
+    }
+    [HttpPut("EditTicket")]
+    [Authorize]
+    public IActionResult EditTicket(EditTicketImportModel editTicket)
+    {
+        if (editTicket != null)
+        {
+            _service.EditTicket(editTicket);
+            return Ok();
+        }
+        return BadRequest();
+    }
+    [HttpDelete("DeleteTicket")]
+    [Authorize]
+    public IActionResult DeleteTicket(DeleteTicketImportModel deleteTicket)
+    {
+        if (deleteTicket != null)
+        {
+            _service.DeleteTicket(deleteTicket.Id);
             return Ok();
         }
         return BadRequest();

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\user\\Desktop\\goPUA\\GoPUA-backend\\GoPUA.csproj": {}
+    "c:\\Users\\user\\Desktop\\goPUA\\GoPUA-backend\\GoPUA.csproj": {}
   },
   "projects": {
-    "C:\\Users\\user\\Desktop\\goPUA\\GoPUA-backend\\GoPUA.csproj": {
+    "c:\\Users\\user\\Desktop\\goPUA\\GoPUA-backend\\GoPUA.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\user\\Desktop\\goPUA\\GoPUA-backend\\GoPUA.csproj",
+        "projectUniqueName": "c:\\Users\\user\\Desktop\\goPUA\\GoPUA-backend\\GoPUA.csproj",
         "projectName": "GoPUA",
-        "projectPath": "C:\\Users\\user\\Desktop\\goPUA\\GoPUA-backend\\GoPUA.csproj",
+        "projectPath": "c:\\Users\\user\\Desktop\\goPUA\\GoPUA-backend\\GoPUA.csproj",
         "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\user\\Desktop\\goPUA\\GoPUA-backend\\obj\\",
+        "outputPath": "c:\\Users\\user\\Desktop\\goPUA\\GoPUA-backend\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config"

@@ -22,13 +22,14 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddScoped<Token>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IActivityService, ActivityService>();
-builder.Services.AddScoped<ITicketService, TicketService>();
+builder.Services.AddScoped<ICartService, CartService>();
+
 
 
 // Repository
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IActivityRepository, ActivityRepository>();
-builder.Services.AddScoped<ITicketRepository, TicketRepository>();
+builder.Services.AddScoped<ICartRepository, CartRepository>();
 
 // 配置 JWT 驗證
 builder.Services

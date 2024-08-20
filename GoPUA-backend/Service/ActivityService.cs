@@ -42,7 +42,7 @@ public class ActivityService : IActivityService
                 hoster = createActivity.hoster,
                 content = createActivity.content,
                 areaImg = FileName,
-                ticket_Id = null
+                ticketList = null
             };
             _repository.CreateActivity(createActModel);
 
@@ -77,7 +77,8 @@ public class ActivityService : IActivityService
                 Directory.CreateDirectory(folderPath);
             }
 
-            var edit = _repository.GetActivity(editActivity.Id);
+            var tickets = GetSameTicket(editActivity.Id);
+
             var editActModel = new ActivityModel
             {
                 Id = editActivity.Id,
@@ -93,7 +94,7 @@ public class ActivityService : IActivityService
                 hoster = editActivity.hoster,
                 content = editActivity.content,
                 areaImg = FileName,
-                ticket_Id = editActivity.ticket_Id
+                ticketList = tickets
             };
             _repository.EditActivity(editActModel);
 
@@ -118,6 +119,14 @@ public class ActivityService : IActivityService
     {
         try
         {
+            var tickets = GetSameTicket(deleteActivity.Id);
+            if (tickets != null)
+            {
+                foreach (var Id in tickets)
+                {
+                    DeleteTicket(Id, deleteActivity.Id);
+                }
+            }
             _repository.DeleteActivity(deleteActivity.Id);
         }
         catch (Exception ex)
@@ -126,5 +135,102 @@ public class ActivityService : IActivityService
         }
     }
     #endregion
+    #region 更新活動的票種
+    public void UpdateActivity(int Id)
+    {
+        try
+        {
+            var tickets = GetSameTicket(Id);
+            var updateActModel = new ActivityModel
+            {
+                Id = Id,
+                ticketList = tickets,
+            };
+            _repository.EditActivity(updateActModel);
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message.ToString());
+        }
+    }
+    #endregion
+    #region 新增票種
+    public void CreateTicket(CreateTicketImportModel createTicket)
+    {
+        try
+        {
+            var createTicModel = new TicketModel
+            {
+                name = createTicket.name,
+                type = createTicket.type,
+                startTime = createTicket.startTime,
+                endTime = createTicket.endTime,
+                totalAmount = createTicket.totalAmount,
+                activity_Id = createTicket.activity_Id
+            };
+            _repository.CreateTicket(createTicModel);
+            UpdateActivity(createTicket.activity_Id);
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message.ToString());
+        }
+    }
+    #endregion
+    #region 編輯票種
+    public void EditTicket(EditTicketImportModel editTicket)
+    {
+        try
+        {
+            var editTicModel = new TicketModel
+            {
+                Id = editTicket.Id,
+                name = editTicket.name,
+                type = editTicket.type,
+                startTime = editTicket.startTime,
+                endTime = editTicket.endTime,
+                totalAmount = editTicket.totalAmount,
+                activity_Id = editTicket.activity_Id
+            };
+            _repository.EditTicket(editTicModel);
+
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message.ToString());
+        }
+    }
+    #endregion
+    #region 刪除票種
+    public void DeleteTicket(int ticket_Id, int activity_Id)
+    {
+        try
+        {
+            _repository.DeleteTicket(ticket_Id);
+            UpdateActivity(activity_Id);
+
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message.ToString());
+        }
+    }
+    #endregion
+    #region 取得活動的票種
+    public List<int> GetSameTicket(int activity_Id)
+    {
+        try
+        {
+            var actTicket = _repository.GetSameTicket(activity_Id);
+            List<int> tickets = actTicket.Select(t => t.Id).ToList();
+            return tickets;
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message.ToString());
+        }
+    }
+    #endregion
+
 }
 

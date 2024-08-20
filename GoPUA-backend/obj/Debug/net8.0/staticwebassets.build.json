@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "7QzlvwAbo4k3nEm6gI7tX2dgmwVECBXu0ATSGN/oaow=",
+  "Hash": "CQK0u5UJTFJw5T0Sw+MgTWwzQB1yCzs9Liz3Z2MsxM4=",
   "Source": "GoPUA",
   "BasePath": "_content/GoPUA",
   "Mode": "Default",
@@ -10,7 +10,7 @@
     {
       "Name": "GoPUA\\wwwroot",
       "Source": "GoPUA",
-      "ContentRoot": "c:\\Users\\user\\Desktop\\GoPUA-backend\\wwwroot\\",
+      "ContentRoot": "c:\\Users\\user\\Desktop\\goPUA\\GoPUA-backend\\wwwroot\\",
       "BasePath": "_content/GoPUA",
       "Pattern": "**"
     }
