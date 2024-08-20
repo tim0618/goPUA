@@ -75,7 +75,7 @@ public class ActivityController : ControllerBase
     {
         if (deleteTicket != null)
         {
-            _service.DeleteTicket(deleteTicket.Id);
+            _service.DeleteTicket(deleteTicket.Id, deleteTicket.activity_Id);
             return Ok();
         }
         return BadRequest();
