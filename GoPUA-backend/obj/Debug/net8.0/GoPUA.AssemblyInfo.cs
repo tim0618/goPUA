@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("GoPUA")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+64d2ab0b1bba66e6a70284b23eb23d5dfc9f5ba1")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+84cfe4bf43c7d18e6a5f7c163c9e8f5d70340545")]
 [assembly: System.Reflection.AssemblyProductAttribute("GoPUA")]
 [assembly: System.Reflection.AssemblyTitleAttribute("GoPUA")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

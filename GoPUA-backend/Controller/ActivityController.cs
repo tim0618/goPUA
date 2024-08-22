@@ -47,6 +47,28 @@ public class ActivityController : ControllerBase
         }
         return BadRequest();
     }
+    [HttpGet("GetAllActivity")]
+    [Authorize]
+    public IActionResult GetAllActivity()
+    {
+        var allactivity = _service.GetAllActivity();
+        if (allactivity != null)
+        {
+            return Ok(allactivity);
+        }
+        return BadRequest();
+    }
+    [HttpPost("GetActivity")]
+    [Authorize]
+    public IActionResult GetActivity(int activity_Id)
+    {
+        var activity = _service.GetActivity(activity_Id);
+        if (activity != null)
+        {
+            return Ok(activity);
+        }
+        return BadRequest();
+    }
     [HttpPost("CreateTicket")]
     [Authorize]
     public IActionResult CreateTicket(CreateTicketImportModel createTicket)
@@ -80,5 +102,26 @@ public class ActivityController : ControllerBase
         }
         return BadRequest();
     }
-
+    [HttpPost("GetTicket")]
+    [Authorize]
+    public IActionResult GetTicket(int ticket_Id)
+    {
+        var ticket = _service.GetTicket(ticket_Id);
+        if (ticket != null)
+        {
+            return Ok(ticket);
+        }
+        return BadRequest();
+    }
+    [HttpPost("GetActivityTicket")]
+    [Authorize]
+    public IActionResult GetActivityTicket(int activity_Id)
+    {
+        var ticket = _service.GetActivityTicket(activity_Id);
+        if (ticket != null)
+        {
+            return Ok(ticket);
+        }
+        return BadRequest();
+    }
 }

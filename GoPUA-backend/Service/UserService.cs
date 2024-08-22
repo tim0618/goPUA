@@ -1,3 +1,4 @@
+using System.IdentityModel.Tokens.Jwt;
 using backend.ImportModel;
 using backend.Model;
 using backend.Repository.Interface;
@@ -15,24 +16,85 @@ public class UserService : IUserService
         _repository = repository;
         _token = token;
     }
+    #region 註冊帳號
     public void Register(RegisterImportModel register)
     {
         try
         {
-            var registerModel = new UserModel
+            if (AccountCheck(register.account))
             {
-                account = register.account,
-                password = register.password,
-                email = register.email,
-                role = register.role
-            };
-            _repository.Register(registerModel);
+                var registerModel = new UserModel
+                {
+                    account = register.account,
+                    password = register.password,
+                    email = register.email,
+                    role = register.role
+                };
+                _repository.Register(registerModel);
+            }
+            else
+            {
+                throw new Exception("帳號已被註冊");
+            }
         }
         catch (Exception ex)
         {
             throw new Exception(ex.Message.ToString());
         }
     }
+    #endregion
+    #region 排除重複帳號
+    public bool AccountCheck(string Account)
+    {
+        try
+        {
+            var oldaccount = _repository.AccountCheck(Account);
+            if (oldaccount == null)
+                return true;
+            else
+                return false;
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message.ToString());
+        }
+    }
+    #endregion
+    #region 編輯會員資料
+    public void EditUser(EditUserImportModel editUser)
+    {
+        try
+        {
+            var editUseModel = new UserModel
+            {
+                Id = editUser.Id,
+                account = editUser.account,
+                password = editUser.password,
+                email = editUser.email,
+            };
+            _repository.EditUser(editUseModel);
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message.ToString());
+        }
+    }
+    #endregion
+
+    #region 刪除帳號
+    public void Eradicate(EradicateImportModel eradicate)
+    {
+        try
+        {
+            _repository.Eradicate(eradicate.Id);
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message.ToString());
+        }
+    }
+    #endregion
+    #region 登入
     public string Login(LoginImportModel login)
     {
         try
@@ -48,6 +110,21 @@ public class UserService : IUserService
             };
             var usertoken = _token.GenerateToken(loginModel);
             return usertoken;
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message.ToString());
+        }
+    }
+    #endregion
+    public string Logout()
+    {
+        try
+        {
+            var expiredToken = new JwtSecurityTokenHandler().WriteToken(new JwtSecurityToken(
+                       expires: DateTime.UtcNow.AddSeconds(-1)));
+
+            return expiredToken;
         }
         catch (Exception ex)
         {

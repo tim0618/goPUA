@@ -8,6 +8,7 @@ using Microsoft.IdentityModel.Tokens;
 namespace backend.Service;
 public class Token
 {
+
     public string GenerateToken(UserModel user)
     {
         string issuer = "JwtAuthDemo";
@@ -33,6 +34,6 @@ public class Token
         var tokenHandler = new JwtSecurityTokenHandler();
         var securityToken = tokenHandler.CreateToken(tokenDescriptor);
         var serializeToken = tokenHandler.WriteToken(securityToken);
-        return $"Bearer {serializeToken}";
+        return serializeToken;
     }
 }

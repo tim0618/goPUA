@@ -2,6 +2,7 @@ using backend.ImportModel;
 using backend.Model;
 using backend.Repository.Interface;
 using backend.Service.Interface;
+using backend.ViewModel;
 
 namespace backend.Service;
 
@@ -135,6 +136,70 @@ public class ActivityService : IActivityService
         }
     }
     #endregion
+    #region 取得所有活動
+    public List<GetActivityViewModel> GetAllActivity()
+    {
+        try
+        {
+            var allactivity = _repository.GetAllActivity();
+
+            var ActModel = allactivity.Select(act => new GetActivityViewModel
+            {
+                Id = act.Id,
+                name = act.name,
+                place = act.place,
+                type = act.type,
+                startSale = act.startSale,
+                endSale = act.endSale,
+                startAct = act.startAct,
+                endAct = act.endAct,
+                startTime = act.startTime,
+                endTime = act.endTime,
+                hoster = act.hoster,
+                content = act.content,
+                areaImg = act.areaImg,
+                ticketList = act.ticketList
+            }).ToList();
+            return ActModel;
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message.ToString());
+        }
+    }
+    #endregion
+    #region 取得單一活動
+    public GetActivityViewModel GetActivity(int activity_Id)
+    {
+        try
+        {
+            var activity = _repository.GetActivity(activity_Id);
+
+            var ActModel = new GetActivityViewModel
+            {
+                Id = activity.Id,
+                name = activity.name,
+                place = activity.place,
+                type = activity.type,
+                startSale = activity.startSale,
+                endSale = activity.endSale,
+                startAct = activity.startAct,
+                endAct = activity.endAct,
+                startTime = activity.startTime,
+                endTime = activity.endTime,
+                hoster = activity.hoster,
+                content = activity.content,
+                areaImg = activity.areaImg,
+                ticketList = activity.ticketList
+            };
+            return ActModel;
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message.ToString());
+        }
+    }
+    #endregion
     #region 更新活動的票種
     public void UpdateActivity(int Id)
     {
@@ -146,7 +211,7 @@ public class ActivityService : IActivityService
                 Id = Id,
                 ticketList = tickets,
             };
-            _repository.EditActivity(updateActModel);
+            _repository.UpdateActivity(updateActModel);
         }
         catch (Exception ex)
         {
@@ -216,12 +281,12 @@ public class ActivityService : IActivityService
         }
     }
     #endregion
-    #region 取得活動的票種
+    #region 取得單一活動的所有票種ID
     public List<int> GetSameTicket(int activity_Id)
     {
         try
         {
-            var actTicket = _repository.GetSameTicket(activity_Id);
+            var actTicket = _repository.GetActivityTicket(activity_Id);
             List<int> tickets = actTicket.Select(t => t.Id).ToList();
             return tickets;
         }
@@ -231,6 +296,55 @@ public class ActivityService : IActivityService
         }
     }
     #endregion
+    #region 取得單一票種
+    public GetTicketViewModel GetTicket(int ticket_Id)
+    {
+        try
+        {
+            var ticket = _repository.GetTicket(ticket_Id);
 
+            var TicModel = new GetTicketViewModel
+            {
+                Id = ticket.Id,
+                name = ticket.name,
+                type = ticket.type,
+                startTime = ticket.startTime,
+                endTime = ticket.endTime,
+                totalAmount = ticket.totalAmount,
+                activity_Id = ticket.activity_Id,
+            };
+            return TicModel;
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message.ToString());
+        }
+    }
+    #endregion
+    #region 取得單一活動的所有票種
+    public List<GetTicketViewModel> GetActivityTicket(int activity_Id)
+    {
+        try
+        {
+            var actTicket = _repository.GetActivityTicket(activity_Id);
+
+            var TicModel = actTicket.Select(act => new GetTicketViewModel
+            {
+                Id = act.Id,
+                name = act.name,
+                type = act.type,
+                startTime = act.startTime,
+                endTime = act.endTime,
+                totalAmount = act.totalAmount,
+                activity_Id = act.activity_Id,
+            }).ToList();
+            return TicModel;
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message.ToString());
+        }
+    }
+    #endregion
 }
 

@@ -5,8 +5,10 @@ using backend.Service;
 using backend.Service.Interface;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System.IO;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args); // 建立 Web 應用程式生成器
@@ -20,16 +22,16 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 // Service
 builder.Services.AddScoped<Token>();
+builder.Services.AddScoped<ActivityService>();
+builder.Services.AddScoped<OrderService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IActivityService, ActivityService>();
-builder.Services.AddScoped<ICartService, CartService>();
-
-
+builder.Services.AddScoped<IOrderService, OrderService>();
 
 // Repository
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IActivityRepository, ActivityRepository>();
-builder.Services.AddScoped<ICartRepository, CartRepository>();
+builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 
 // 配置 JWT 驗證
 builder.Services
@@ -62,6 +64,13 @@ builder.Services.AddSwaggerGen(c =>
 
 var app = builder.Build(); // 建立 Web 應用程式
 
+// 檢查並建立 wwwroot 資料夾
+var wwwrootPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
+if (!Directory.Exists(wwwrootPath))
+{
+    Directory.CreateDirectory(wwwrootPath);
+}
+
 // 配置 HTTP 請求
 if (!app.Environment.IsDevelopment())
 {
@@ -70,7 +79,14 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection(); // 強制使用 HTTPS
-app.UseStaticFiles(); // 啟用靜態文件服務
+
+// 配置靜態文件服務
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(wwwrootPath),
+    RequestPath = "/static"
+});
+
 app.UseRouting(); // 啟用路由功能
 
 app.UseAuthentication(); // 啟用身份驗證中間件
