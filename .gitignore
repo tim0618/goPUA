@@ -28,4 +28,4 @@ dist-ssr
 /.vscode
 /appsettings.json
 
-obj
+./obj
