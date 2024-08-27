@@ -29,3 +29,4 @@ dist-ssr
 /appsettings.json
 
 /GoPUA-backend/bin/*
+/GoPUA-backend/obj/*
