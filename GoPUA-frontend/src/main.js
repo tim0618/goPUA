@@ -30,11 +30,21 @@ import ShowItem from "./page/ShowItem.vue";
 import ConcertItem from "./page/ConcertItem.vue";
 import EventItem from "./page/EventItem.vue";
 
+import AAA from "./page/AAA.vue";
+
+
 const routes = [
   {
     path: "/",
     component: Layout,
     children: [
+
+      {
+        path: "/AAA",
+        name: "AAA",
+        component: AAA,
+      },
+
       {
         path: "/",
         name: "GoPUA",

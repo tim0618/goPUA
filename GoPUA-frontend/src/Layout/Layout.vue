@@ -20,10 +20,15 @@
             {{ userLogin }}
             <a href="/Cart"> <font-awesome-icon :icon="['fas', 'user']" /> </a>
             <a href="/User"> <font-awesome-icon :icon="['fas', 'user']" /> </a>
-            <q-btn label="登出" @click="" class="loginbtn" />
+            <q-btn v-if="userLogin" label="登出" @click="" class="loginbtn" />
           </div>
           <div>
-            <q-btn label="登入" @click="choiceLogin" class="loginbtn" />
+            <q-btn
+              v-if="userLogin"
+              label="登入"
+              @click="choiceLogin"
+              class="loginbtn"
+            />
           </div>
         </q-toolbar>
       </q-header>
@@ -154,6 +159,18 @@
               >
               </q-expansion-item>
             </q-expansion-item>
+
+            <q-expansion-item
+              clickable
+              v-ripple
+              href="/AAA"
+              :content-inset-level="0.5"
+              expand-separator
+              icon="mail"
+              label="留言區"
+              expand-icon="null"
+            >
+            </q-expansion-item>
           </q-list>
         </q-scroll-area>
 
@@ -182,6 +199,8 @@
 import { ref, h } from "vue";
 import { useQuasar } from "quasar";
 import LoginPage from "../page/Login.vue";
+import axios from "axios";
+import LoginApi from "../js/Login";
 
 const miniState = ref(false);
 const drawer = ref(false);
@@ -215,6 +234,8 @@ const choiceLogin = () => {
     },
     onLogin: (data) => {
       userLogin.value = data;
+      LoginApi.login(data);
+      // login(data);
       contentRef.value.hide();
     },
     onCancel: () => {
@@ -233,16 +254,19 @@ const choiceLogin = () => {
   font-weight: bold;
   font-size: 16px;
 }
+
 .header {
   display: flex;
   flex-direction: row;
 }
+
 .title {
   font-size: 32px;
   font-weight: bold;
   text-decoration: none;
   color: rgb(22, 13, 81);
 }
+
 .loginbtn {
   width: 75px;
   margin: 15px;

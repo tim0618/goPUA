@@ -68,6 +68,8 @@ const hotActs = reactive([
   },
 ]);
 
+// computed 資料一變動馬上更新
+// .sort 排序
 const sorteredActivity = computed(() => {
   return hotActs.sort((a, b) => new Date(a.day) - new Date(b.day));
 });
